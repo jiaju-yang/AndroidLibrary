@@ -1,0 +1,108 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    //Android
+    androidBuildToolsVersion = "23.0.3"
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+
+    androidApplicationId = 'io.github.psychesworld.library'
+    testApplicationId = 'io.github.psychesworld.library.test'
+
+    appCompatVersion = '23.4.0'
+
+    //Libraries
+    daggerVersion = '2.0.2'
+    butterKnifeVersion = '7.0.1'
+    rxJavaVersion = '1.1.1'
+    rxAndroidVersion = '1.1.0'
+    javaxAnnotationVersion = '1.0'
+    zxingVersion = '1.8.4'
+
+    okHttpVersion = '3.2.0'
+    retrofitVersion = '2.0.2'
+    rxjavaAdapterVersion = '2.0.2'
+    converterJacksonVersion = '2.0.2'
+    converterGsonVersion = '2.0.2'
+    swaggerAnnotationVersion = '1.5.8'
+    picassoVersion = '2.5.2'
+
+    stethoVersion = '1.3.1'
+    stethoOkHttpVersion = '1.3.1'
+
+    //Testing
+    robolectricVersion = '3.0'
+    jUnitVersion = '4.12'
+    hamcrestLibraryVersion = '1.3'
+    assertJVersion = '3.3.0'
+    mockitoVersion = '2.0.48-beta'
+    powermockVersion = '1.6.5'
+    mockWebserverVersion = '3.2.0'
+    commonsIoVersion = '2.4'
+
+    //Development
+    leakCanaryVersion = '1.3.1'
+
+    dependencies = [
+            appCompat        : "com.android.support:appcompat-v7:${appCompatVersion}",
+
+            //Dependency Injection
+            daggerCompiler   : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger           : "com.google.dagger:dagger:${daggerVersion}",
+            //view注入
+            butterKnife      : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            //函数式响应库
+            rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid       : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            //二维码
+            zxing           : "me.dm7.barcodescanner:zxing:${zxingVersion}",
+
+            //底层网络请求实现
+            okHttp          : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            //网络请求库
+            retrofit        : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            //retrofit的rxjava适配
+            adapterRxjava   : "com.squareup.retrofit2:adapter-rxjava:${rxjavaAdapterVersion}",
+            //retrofit的序列化工具
+            converterJackson: "com.squareup.retrofit2:converter-jackson:${converterJacksonVersion}",
+            converterGson   : "com.squareup.retrofit2:converter-gson:${converterGsonVersion}",
+            swaggerAnnotation: "io.swagger:swagger-annotations:${swaggerAnnotationVersion}",
+            //图片加载库，不能加载gif，后期看是否换成glide
+            picasso         : "com.squareup.picasso:picasso:${picassoVersion}",
+
+            //facebook的app调试神器，可以调试网络、view hierarchy、content persistentence
+            stetho          : "com.facebook.stetho:stetho:${stethoVersion}",
+            stethoOkHttp    : "com.facebook.stetho:stetho-okhttp3:${stethoOkHttpVersion}",
+    ]
+
+    testDependencies = [
+            junit           : "junit:junit:${jUnitVersion}",
+            hamcrestLibrary : "org.hamcrest:hamcrest-library:${hamcrestLibraryVersion}",
+            assertj         : "org.assertj:assertj-core:${assertJVersion}",
+            //mock包
+            mockito         : "org.mockito:mockito-core:${mockitoVersion}",
+            //静态方法mock
+            powermockMockito: "org.powermock:powermock-api-mockito2:${powermockVersion}",
+            powermockJunit4 : "org.powermock:powermock-module-junit4:${powermockVersion}",
+            //单元测试时android环境模拟器
+            robolectric     : "org.robolectric:robolectric:${robolectricVersion}",
+            //单元测试的模拟服务器
+            mockWebserver   : "com.squareup.okhttp3:mockwebserver:${mockWebserverVersion}",
+            //apache文件读取库
+            commonsIo       : "commons-io:commons-io:${commonsIoVersion}",
+    ]
+
+    developmentDependencies = [
+            //内存泄露监测
+            debugLeakCanary  : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            releaseLeakCanary: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+    ]
+}

@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "io.github.psychesworld.library"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+    def developmentDependencies = rootProject.ext.developmentDependencies
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile project(':cleanarchitecture')
+
+    compile dependencies.appCompat
+
+    apt dependencies.daggerCompiler
+    compile dependencies.dagger
+    provided dependencies.javaxAnnotation
+    compile dependencies.converterJackson
+
+    compile dependencies.stetho
+    compile dependencies.stethoOkHttp
+
+    //Testing
+    testCompile testDependencies.junit
+    testCompile testDependencies.hamcrestLibrary
+
+    //Development
+    debugCompile developmentDependencies.debugLeakCanary
+    releaseCompile developmentDependencies.releaseLeakCanary
+}

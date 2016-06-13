@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    def configurations = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion configurations.getAt("androidCompileSdkVersion")
+    buildToolsVersion configurations.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion configurations.getAt("androidMinSdkVersion")
+        targetSdkVersion configurations.getAt("androidTargetSdkVersion")
+        versionCode configurations.getAt("androidVersionCode")
+        versionName configurations.getAt("androidVersionName")
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("../buildsystem/debug.jks")
+            storePassword "99999999"
+            keyAlias "Debug"
+            keyPassword "99999999"
+        }
+    }
+}
+
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+    def developmentDependencies = rootProject.ext.developmentDependencies
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    apt dependencies.daggerCompiler
+    compile dependencies.dagger
+    provided dependencies.javaxAnnotation
+    compile dependencies.rxJava
+    compile dependencies.rxAndroid
+
+    compile dependencies.retrofit
+    compile dependencies.adapterRxjava
+
+    //Testing
+    testCompile testDependencies.junit
+    testCompile testDependencies.hamcrestLibrary
+    compile 'com.android.support:support-annotations:23.4.0'
+}
